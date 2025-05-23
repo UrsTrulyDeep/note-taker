@@ -11,7 +11,7 @@
         <a class="nav-link text-light" href="index.jsp">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="add_notes.jsp">Add a Note</a>
+        <a class="nav-link text-light" href="add_notes.jsp">Add Note</a>
       </li>
       <li class="nav-item">
         <a class="nav-link text-light" href="all_notes.jsp">Show Notes</a>
