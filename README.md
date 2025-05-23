@@ -31,11 +31,3 @@ A simple and clean web-based note-taking application built using **Java**, **JSP
 ![image](https://github.com/user-attachments/assets/b1167586-7e63-4aa2-9a4b-b8fb285b68b9)
 
 ---
-
-## 🚀 Getting Started
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/your-username/note-taker-app.git
-cd note-taker-app
