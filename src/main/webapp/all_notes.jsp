@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="org.hibernate.Query"%>
 <%@page import="com.helper.FactoryProvider"%>
@@ -9,57 +8,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>All notes: Note Taker</title>
-<%@include file="all_js_css.jsp"%>
+  <meta charset="ISO-8859-1">
+  <title>All Notes: Note Taker</title>
+  <%@include file="all_js_css.jsp"%>
 </head>
 <body>
 
-	<div class="container">
-		<%@include file="navbar.jsp"%>
-		<br>
-		<h1 class="text-uppercase">All Notes:</h1>
+  <div class="container">
+    <%@include file="navbar.jsp"%>
+    <br>
+    <h2 class="text-uppercase text-dark mb-4">Your Saved Notes</h2>
 
+    <div class="row">
+      <div class="col-12">
 
-		<div class="row">
+        <%
+          Session s = FactoryProvider.getFactory().openSession();
+          Query q = s.createQuery("from Note");
+          List<Note> list = q.list();
+          for (Note note : list) {
+        %>
 
-			<div class="col-12">
+        <div class="card bg-light shadow-sm rounded mb-4">
+          <img class="card-img-top mx-auto d-block mt-4" style="max-width:100px;" src="img/notepad.png" alt="Note image">
+          <div class="card-body px-4">
+            <h4 class="card-title text-primary"><%= note.getTitle() %></h4>
+            <p class="card-text text-muted"><%= note.getContent() %></p>
+            <p class="text-end mb-3"><small class="text-secondary">Added on: <%= note.getAddedDate()  %></small></p>
+            <div class="text-center">
+              <a href="DeleteServlet?note_id=<%= note.getId() %>" class="btn btn-outline-danger me-2">Delete</a>
+              <a href="edit.jsp?note_id=<%= note.getId() %>" class="btn btn-outline-success">Edit</a>
+            </div>
+          </div>
+        </div>
 
-				<%
-					Session s = FactoryProvider.getFactory().openSession();
-				Query q = s.createQuery("from Note");
-				List<Note> list = q.list();
-				for (Note note : list) {
-				%>
+        <%
+          }
+          s.close();
+        %>
 
-				<div class="card mt-3" >
-					<img class="card-img-top m-4 mx-auto" style="max-width:100px;" src="img/notepad.png" alt="Card image cap">
-					<div class="card-body px-5">
-						<h5 class="card-title"><%= note.getTitle() %></h5>
-						<p class="card-text">
-						<%= note.getContent() %>
-						</p>
-						<p ><b class="text-primary"><%= note.getAddedDate()  %></b></p>
-						<div class="container text-center mt-2">
-						<a href="DeleteServlet?note_id=<%= note.getId() %>" class="btn btn-danger">Delete</a>
-						<a href="edit.jsp?note_id=<%= note.getId() %>" class="btn btn-primary">Update</a>
-						</div>
-					</div>
-				</div>
+      </div>
+    </div>
 
-
-				<%
-					}
-
-				s.close();
-				%>
-
-
-			</div>
-
-		</div>
-
-
-	</div>
+  </div>
 </body>
 </html>
